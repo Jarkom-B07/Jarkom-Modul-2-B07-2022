@@ -67,7 +67,7 @@ Untuk mempermudah mendapatkan informasi mengenai misi dari Handler, bantulah Loi
 **Jawab :**
 Wise
 lakukan ```nano /etc/bind/named.conf.local``` untuk mengedit
-![Logo Nomer 1](/image/nomer2.png)
+![Logo Nomer 1](/image/nomer2.1.png)
 ## Nomer 3 ##
 Setelah itu ia juga ingin membuat subdomain eden.wise.yyy.com dengan alias www.eden.wise.yyy.com yang diatur DNS-nya di WISE dan mengarah ke Eden
 ## Nomer 4 ##
