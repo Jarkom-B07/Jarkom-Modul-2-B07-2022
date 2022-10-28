@@ -9,9 +9,54 @@
 
 
 ## Script .bashrc
+### Wise ###
 ```
-calendar=$(date +%D)
-time=$(date +%T)
+echo 'nameserver 192.168.122.1' > /etc/resolv.conf
+apt-get update
+apt-get install bind9 -y
+mkdir /etc/bind/wise
+```
+
+### Berlint ###
+```
+echo nameserver 192.168.122.1 > /etc/resolv.conf
+apt-get update
+apt-get install bind9 -y
+mkdir /etc/bind/operation
+```
+### Eden ###
+```
+echo nameserver 192.168.122.1 > /etc/resolv.conf
+apt-get install nano -y
+apt-get install bind9 -y
+apt-get install apache2 -y
+apt-get install php -y
+apt-get install libapache2-mod-php7.0
+service apache2 start
+apt-get install ca-certificates openssl -y
+apt-get install unzip -y
+apt-get install git -y
+git clone https://github.com/Rendyfranzz/resourcejarkom2.git
+unzip -o /resourcejarkom2/\*.zip -d /Resourcegan
+```
+
+### SSS ###
+```
+echo nameserver 192.168.122.1 > /etc/resolv.conf
+apt-get update
+apt-get install dnsutils -y
+apt-get install lynx -y
+echo nameserver 192.176.2.2 > /etc/resolv.conf
+echo nameserver 192.176.3.2 >> /etc/resolv.conf
+```
+### Garden ###
+```
+echo nameserver 192.168.122.1 > /etc/resolv.conf
+apt-get update
+apt-get install dnsutils -y
+apt-get install lynx -y
+echo nameserver 192.176.2.2 > /etc/resolv.conf
+echo nameserver 192.176.3.2 >> /etc/resolv.conf
 ```
 ## Nomer 1 ##
 WISE akan dijadikan sebagai DNS Master, Berlint akan dijadikan DNS Slave, dan Eden akan digunakan sebagai Web Server. Terdapat 2 Client yaitu SSS, dan Garden. Semua node terhubung pada router Ostania, sehingga dapat mengakses internet.
@@ -19,6 +64,10 @@ WISE akan dijadikan sebagai DNS Master, Berlint akan dijadikan DNS Slave, dan Ed
 ![Logo Nomer 1](/image/nomer1.png)
 ## Nomer 2 ##
 Untuk mempermudah mendapatkan informasi mengenai misi dari Handler, bantulah Loid membuat website utama dengan akses wise.yyy.com dengan alias www.wise.yyy.com pada folder wise 
+**Jawab :**
+Wise
+lakukan ```nano /etc/bind/named.conf.local``` untuk mengedit
+![Logo Nomer 1](/image/nomer2.png)
 ## Nomer 3 ##
 Setelah itu ia juga ingin membuat subdomain eden.wise.yyy.com dengan alias www.eden.wise.yyy.com yang diatur DNS-nya di WISE dan mengarah ke Eden
 ## Nomer 4 ##
