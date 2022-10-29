@@ -70,6 +70,7 @@ lakukan ```nano /etc/bind/named.conf.local``` untuk mengedit
 ![Logo Nomer 1](/image/nomer2.1.png)
 ## Nomer 3 ##
 Setelah itu ia juga ingin membuat subdomain eden.wise.yyy.com dengan alias www.eden.wise.yyy.com yang diatur DNS-nya di WISE dan mengarah ke Eden
+
 a. Lakukan konfigurasi ```/etc/bind/wise/wise.B07.com``` di wise
 ```
 echo '
@@ -94,6 +95,7 @@ www.eden     IN      CNAME   eden.wise.b07.com.
 b. Kemudian restart ```service bind9 restart``` dan lakukan ```ping www.eden.wise.B07.com```
 ## Nomer 4 ##
 Buat juga reverse domain untuk domain utama
+
 a. Lakukan konfigurasi ```/etc/bind/wise/2.176.192.in-addr.arpa``` di wise
 ```
 echo '
