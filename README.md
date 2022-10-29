@@ -99,10 +99,10 @@ pada eden buat config baru dengan ```nano /etc/apache2/sites-available/strix.ope
 ![Logo Nomer 14.1](/image/nomer14.1.png)
 kemudian aktifkat dengan ```a2ensite strix.operation.wise.b07.com```
 kemudian edit juga pada ```/etc/apache2/ports.conf ``` seperti berikut
-![Logo Nomer 14.2](/image/nomer14.2.png)
+![Logo Nomer 14.2](/image/14.2.png)
 dan jangan lupa untuk copy resourcenya ``` cp -r /Resourcegan/strix.operation.wise/. /var/www/strix.operation.wise.b07.com/ ```
 Kemudian tes dengan ``` lynx strix.operation.wise.b07.com:15000``` atau 15500 
-![Logo Nomer 14.3](/image/nomer14.3.png)
+![Logo Nomer 14.3](/image/14.3.png)
 
 ## Nomer 15 ##
 dengan autentikasi username Twilight dan password opStrix dan file di /var/www/strix.operation.wise.yyy
