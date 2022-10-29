@@ -71,7 +71,7 @@ lakukan ```nano /etc/bind/named.conf.local``` untuk mengedit
 ## Nomer 3 ##
 Setelah itu ia juga ingin membuat subdomain eden.wise.yyy.com dengan alias www.eden.wise.yyy.com yang diatur DNS-nya di WISE dan mengarah ke Eden
 
-a. Lakukan konfigurasi ```/etc/bind/wise/wise.B07.com``` di wise
+a. Lakukan konfigurasi ```/etc/bind/wise/wise.B07.com``` di Wise
 ```
 echo '
 ;
@@ -92,11 +92,11 @@ eden    IN      A       192.176.3.3
 www.eden     IN      CNAME   eden.wise.b07.com.
 ' > /etc/bind/wise/wise.b07.com
 ```
-b. Kemudian restart ```service bind9 restart``` dan lakukan ```ping www.eden.wise.B07.com```
+b. Kemudian restart ```service bind9 restart``` di Wise dan lakukan ```ping www.eden.wise.B07.com``` di client
 ## Nomer 4 ##
 Buat juga reverse domain untuk domain utama
 
-a. Lakukan konfigurasi ```/etc/bind/wise/2.176.192.in-addr.arpa``` di wise
+a. Lakukan konfigurasi ```/etc/bind/wise/2.176.192.in-addr.arpa``` di Wise
 ```
 echo '
 ;
@@ -114,7 +114,7 @@ $TTL    604800
 2                       IN      PTR     wise.b07.com.
 ' > /etc/bind/wise/2.176.192.in-addr.arpa
 ```
-b. Lakukan konfigurasi ```/etc/bind/named.conf.local``` di wise
+b. Lakukan konfigurasi ```/etc/bind/named.conf.local``` di Wise
 ```
 zone "2.176.192.in-addr.arpa" {
     type master;
@@ -122,9 +122,20 @@ zone "2.176.192.in-addr.arpa" {
 };
 ' > /etc/bind/named.conf.local
 ```
-c. Kemudian restart ```service bind9 restart``` dan lakukan ```host -t PTR 192.176.3.2```
+c. Kemudian restart ```service bind9 restart``` di Wise dan lakukan ```host -t PTR 192.176.3.2``` di client
 ## Nomer 5 ##
 Agar dapat tetap dihubungi jika server WISE bermasalah, buatlah juga Berlint sebagai DNS Slave untuk domain utama
+
+a. Konfigurasi ```/etc/bind/named.conf.local``` di Berlint
+```
+echo '
+zone "wise.b07.com" {
+    type slave;
+    masters { 192.176.2.2; }; // Masukan IP Wise tanpa tanda petik
+    file "/var/lib/bind/wise.b07.com";
+}; ' > /etc/bind/named.conf.local
+```
+b. Kemudian restart ```service bind9 restart``` di Berlint dan stop ```service bind9 stop``` di Wise. Lakukan ```ping www.wise.B07.com``` di client
 ## Nomer 6 ##
 Karena banyak informasi dari Handler, buatlah subdomain yang khusus untuk operation yaitu operation.wise.yyy.com dengan alias www.operation.wise.yyy.com yang didelegasikan dari WISE ke Berlint dengan IP menuju ke Eden dalam folder operation 
 ## Nomer 7 ##
