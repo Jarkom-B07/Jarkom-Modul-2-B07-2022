@@ -231,6 +231,25 @@ Kemudian tes dengan ``` lynx strix.operation.wise.b07.com:15000``` atau 15500
 
 ## Nomer 15 ##
 dengan autentikasi username Twilight dan password opStrix dan file di /var/www/strix.operation.wise.yyy
+
+**Jawab :**
+
+bikin password di Eden buat apache2 ```htpasswd -c -b /etc/apache2/.htpasswd Twilight opStrix```
+dan tambahkan 
+```
+<Directory \"/var/www/strix.operation.wise.b07.com\">
+                AuthType Basic
+                AuthName \"Restricted Content\"
+                AuthUserFile /etc/apache2/.htpasswd
+                Require valid-user
+        </Directory>
+```
+pada setiap host
+lalu test dengan ```lynx strix.operation.wise.b07.com:15000```
+maka akan disuruh memasukan username dan password
+![Logo Nomer 15.1](/image/15.1.png)
+dan hasilnya seperti ini
+![Logo Nomer 15.2](/image/15.2.png)
 ## Nomer 16 ##
 dan setiap kali mengakses IP Eden akan dialihkan secara otomatis ke www.wise.yyy.com
 ## Nomer 17 ##
