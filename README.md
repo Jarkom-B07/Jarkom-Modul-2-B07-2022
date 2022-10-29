@@ -252,5 +252,17 @@ dan hasilnya seperti ini
 ![Logo Nomer 15.2](/image/15.2.png)
 ## Nomer 16 ##
 dan setiap kali mengakses IP Eden akan dialihkan secara otomatis ke www.wise.yyy.com
+
+**Jawab :**
+
+```
+RewriteEngine On
+        RewriteCond %{HTTP_HOST} ^192\.176\.3\.3$
+        RewriteRule /.* http://wise.b07.com/ [R]
+``` pada ``` /etc/apache2/sites-available/000-default.conf ```
+
+lalu tes menggunakan Ip Eden ``` lynx 192.176.3.3 ```
+Maka hasilnya 
+![Logo Nomer 16](/image/16.png)
 ## Nomer 17 ##
 Karena website www.eden.wise.yyy.com semakin banyak pengunjung dan banyak modifikasi sehingga banyak gambar-gambar yang random, maka Loid ingin mengubah request gambar yang memiliki substring “eden” akan diarahkan menuju eden.png. Bantulah Agent Twilight dan Organisasi WISE menjaga perdamaian!
