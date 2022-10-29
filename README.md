@@ -739,7 +739,7 @@ untuk mengecek konfigurasi, pada node **client** (SSS dan Garden) lakukan perint
     ![gambar10b](image/10b.png)
 
 ### Nomer 14 ###
-Loid meminta agar www.strix.operation.wise.b07.com hanya bisa diakses dengan port 15000 dan port 15500
+Loid meminta agar www.strix.operation.wise.yyy.com hanya bisa diakses dengan port 15000 dan port 15500
 
 **Jawab :**
 
@@ -756,8 +756,55 @@ Kemudian tes dengan ``` lynx strix.operation.wise.b07.com:15000``` atau 15500
 ![Logo Nomer 14.3](/image/14.3.png)
 
 ### Nomer 15 ###
-dengan autentikasi username Twilight dan password opStrix dan file di /var/www/strix.operation.wise.b07
+dengan autentikasi username Twilight dan password opStrix dan file di /var/www/strix.operation.wise.yyy
+
+**Jawab :**
+
+bikin password di Eden buat apache2 ```htpasswd -c -b /etc/apache2/.htpasswd Twilight opStrix```
+dan tambahkan 
+```
+<Directory \"/var/www/strix.operation.wise.b07.com\">
+                AuthType Basic
+                AuthName \"Restricted Content\"
+                AuthUserFile /etc/apache2/.htpasswd
+                Require valid-user
+        </Directory>
+```
+pada setiap host
+lalu test dengan ```lynx strix.operation.wise.b07.com:15000```
+maka akan disuruh memasukan username dan password
+![Logo Nomer 15.1](/image/15.1.png)
+dan hasilnya seperti ini
+![Logo Nomer 15.2](/image/15.2.png)
 ### Nomer 16 ###
-dan setiap kali mengakses IP Eden akan dialihkan secara otomatis ke www.wise.b07.com
+dan setiap kali mengakses IP Eden akan dialihkan secara otomatis ke www.wise.yyy.com
+
+**Jawab :**
+```
+        RewriteEngine On
+        RewriteCond %{HTTP_HOST} ^192\.176\.3\.3$
+        RewriteRule /.* http://wise.b07.com/ [R]
+```
+pada  /etc/apache2/sites-available/000-default.conf
+
+lalu tes menggunakan Ip Eden lynx 192.176.3.3
+Maka hasilnya 
+![Logo Nomer 16](/image/16.png)
+
 ### Nomer 17 ###
-Karena website www.eden.wise.b07.com semakin banyak pengunjung dan banyak modifikasi sehingga banyak gambar-gambar yang random, maka Loid ingin mengubah request gambar yang memiliki substring “eden” akan diarahkan menuju eden.png. Bantulah Agent Twilight dan Organisasi WISE menjaga perdamaian!
+Karena website www.eden.wise.yyy.com semakin banyak pengunjung dan banyak modifikasi sehingga banyak gambar-gambar yang random, maka Loid ingin mengubah request gambar yang memiliki substring “eden” akan diarahkan menuju eden.png. Bantulah Agent Twilight dan Organisasi WISE menjaga perdamaian!
+
+**Jawab :**
+
+pada eden nano /var/www/eden.wise.b07.com/.htaccess dan tambahkan
+```
+RewriteEngine On
+RewriteBase /
+RewriteCond %{REQUEST_URI} !/public/images/eden.png
+RewriteRule /.* http://eden.wise.b07.com/public/images/eden.png [L]
+```
+lalu ganti config pada /etc/apache2/sites-available/eden.wise.b07.com.conf dengan menambah AllowOverride All
+lalu jangan lupa a2enmod rewrite dan juga jangan lupa restart apache
+![Logo Nomer 17.1](/image/17.1.png)
+lalu cek dengan ```lynx www.eden.wise.b07.com/asedenash``` maka hasilnya
+![Logo Nomer 17.2](/image/17.2.png)
