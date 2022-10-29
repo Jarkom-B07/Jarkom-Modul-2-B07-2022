@@ -92,6 +92,13 @@ Tidak hanya itu, Loid juga ingin menyiapkan error file 404.html pada folder /err
 Loid juga meminta Franky untuk dibuatkan konfigurasi virtual host. Virtual host ini bertujuan untuk dapat mengakses file asset www.eden.wise.yyy.com/public/js menjadi www.eden.wise.yyy.com/js
 ## Nomer 14 ##
 Loid meminta agar www.strix.operation.wise.yyy.com hanya bisa diakses dengan port 15000 dan port 15500
+
+**Jawab :**
+
+pada eden buat config baru dengan ```nano /etc/apache2/sites-available/strix.operation.wise.b07.com.conf ````
+![Logo Nomer 1](/image/nomer14.1.png)
+kemudian aktifkat dengan ```a2ensite strix.operation.wise.b07.com````
+
 ## Nomer 15 ##
 dengan autentikasi username Twilight dan password opStrix dan file di /var/www/strix.operation.wise.yyy
 ## Nomer 16 ##
