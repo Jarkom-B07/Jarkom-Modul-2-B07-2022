@@ -70,8 +70,57 @@ lakukan ```nano /etc/bind/named.conf.local``` untuk mengedit
 ![Logo Nomer 1](/image/nomer2.1.png)
 ## Nomer 3 ##
 Setelah itu ia juga ingin membuat subdomain eden.wise.yyy.com dengan alias www.eden.wise.yyy.com yang diatur DNS-nya di WISE dan mengarah ke Eden
+a. Lakukan konfigurasi ```/etc/bind/wise/wise.B07.com``` di wise
+```
+echo '
+;
+; BIND data file for local loopback interface
+;
+$TTL    604800
+@       IN      SOA     wise.b07.com. root.wise.b07.com. (
+                        2022102401      ; Serial
+                         604800         ; Refresh
+                          86400         ; Retry
+                        2419200         ; Expire
+                         604800 )       ; Negative Cache TTL
+;
+@       IN      NS      wise.b07.com.
+@       IN      A       192.176.2.2
+www     IN      CNAME   wise.b07.com.
+eden    IN      A       192.176.3.3
+www.eden     IN      CNAME   eden.wise.b07.com.
+' > /etc/bind/wise/wise.b07.com
+```
+b. Kemudian restart ```service bind9 restart``` dan lakukan ```ping www.eden.wise.B07.com```
 ## Nomer 4 ##
 Buat juga reverse domain untuk domain utama
+a. Lakukan konfigurasi ```/etc/bind/wise/2.176.192.in-addr.arpa``` di wise
+```
+echo '
+;
+; BIND data file for local loopback interface
+;
+$TTL    604800
+@       IN      SOA     wise.b07.com. root.wise.b07.com. (
+                        2022102401      ; Serial
+                         604800         ; Refresh
+                          86400         ; Retry
+                        2419200         ; Expire
+                         604800 )       ; Negative Cache TTL
+;
+2.176.192.in-addr.arpa. IN      NS      wise.b07.com.
+2                       IN      PTR     wise.b07.com.
+' > /etc/bind/wise/2.176.192.in-addr.arpa
+```
+b. Lakukan konfigurasi ```/etc/bind/named.conf.local``` di wise
+```
+zone "2.176.192.in-addr.arpa" {
+    type master;
+    file "/etc/bind/jarkom/2.176.192.in-addr.arpa";
+};
+' > /etc/bind/named.conf.local
+```
+c. Kemudian restart ```service bind9 restart``` dan lakukan ```host -t PTR 192.176.3.2```
 ## Nomer 5 ##
 Agar dapat tetap dihubungi jika server WISE bermasalah, buatlah juga Berlint sebagai DNS Slave untuk domain utama
 ## Nomer 6 ##
