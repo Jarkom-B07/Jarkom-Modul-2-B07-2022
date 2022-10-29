@@ -118,7 +118,7 @@ b. Lakukan konfigurasi ```/etc/bind/named.conf.local``` di Wise
 ```
 zone "2.176.192.in-addr.arpa" {
     type master;
-    file "/etc/bind/jarkom/2.176.192.in-addr.arpa";
+    file "/etc/bind/wise/2.176.192.in-addr.arpa";
 };
 ' > /etc/bind/named.conf.local
 ```
@@ -138,6 +138,66 @@ zone "wise.b07.com" {
 b. Kemudian restart ```service bind9 restart``` di Berlint dan stop ```service bind9 stop``` di Wise. Lakukan ```ping www.wise.B07.com``` di client
 ## Nomer 6 ##
 Karena banyak informasi dari Handler, buatlah subdomain yang khusus untuk operation yaitu operation.wise.yyy.com dengan alias www.operation.wise.yyy.com yang didelegasikan dari WISE ke Berlint dengan IP menuju ke Eden dalam folder operation 
+
+a. Konfigurasi ```/etc/bind/wise/wise.B07.com``` di Wise
+```
+echo '
+ns1       IN      A       192.176.3.2
+operation       IN      NS       ns1
+' >> /etc/bind/wise/wise.b07.com
+```
+b. Konfigurasi ```/etc/bind/named.conf.options``` di Wise
+```
+echo '
+options {
+        directory "/var/cache/bind";
+        // forwarders {
+        //      0.0.0.0;
+        // };
+        //dnssec-validation auto;
+        allow-query{any;};
+        auth-nxdomain no;    # conform to RFC1035
+        listen-on-v6 { any; };
+};
+' > /etc/bind/named.conf.options
+```
+c. Konfigurasi ```/etc/bind/operation/operation.wise.B07.com``` di Berlint
+```
+echo '
+;
+; BIND data file for local loopback interface
+;
+$TTL    604800
+@       IN      SOA     operation.wise.b07.com. root.operation.wise.b07.com. (
+                        2022102401      ; Serial
+                         604800         ; Refresh
+                          86400         ; Retry
+                        2419200         ; Expire
+                         604800 )       ; Negative Cache TTL
+;
+@       IN      NS      operation.wise.b07.com.
+@       IN      A       192.176.3.3
+www     IN      CNAME   operation.wise.b07.com.
+strix    IN      A       192.176.3.3
+www.strix     IN      CNAME   strix.operation.wise.b07.com.
+' > /etc/bind/operation/operation.wise.b07.com
+```
+d. Konfigurasi ```/etc/bind/named.conf.options``` di Berlint
+```
+echo '
+options {
+        directory "/var/cache/bind";
+        // forwarders {
+        //      0.0.0.0;
+        // };
+        //dnssec-validation auto;
+        allow-query{any;};
+        auth-nxdomain no;    # conform to RFC1035
+        listen-on-v6 { any; };
+};
+' > /etc/bind/named.conf.options
+```
+e. Kemudian restart ```service bind9 restart``` di Wise dan Berlint. Lakukan ```ping www.wise.B07.com``` di client
 ## Nomer 7 ##
 Untuk informasi yang lebih spesifik mengenai Operation Strix, buatlah subdomain melalui Berlint dengan akses strix.operation.wise.yyy.com dengan alias www.strix.operation.wise.yyy.com yang mengarah ke Eden
 ## Nomer 8 ##
