@@ -97,7 +97,9 @@ Loid meminta agar www.strix.operation.wise.yyy.com hanya bisa diakses dengan por
 
 pada eden buat config baru dengan ```nano /etc/apache2/sites-available/strix.operation.wise.b07.com.conf ```
 ![Logo Nomer 14.1](/image/nomer14.1.png)
-kemudian aktifkat dengan ```a2ensite strix.operation.wise.b07.com````
+kemudian aktifkat dengan ```a2ensite strix.operation.wise.b07.com```
+kemudian edit juga pada ```/etc/apache2/ports.conf ``` seperti berikut
+![Logo Nomer 14.1](/image/nomer14.2.png)
 
 ## Nomer 15 ##
 dengan autentikasi username Twilight dan password opStrix dan file di /var/www/strix.operation.wise.yyy
