@@ -21,7 +21,7 @@ WISE akan dijadikan sebagai DNS Master, Berlint akan dijadikan DNS Slave, dan Ed
 
 **Jawab :**
 
-![GambarTopologi](image/topology.png)
+![GambarTopologi](image/topologyline.png)
 
 pembuatan topologi diatas dilakukan pada webpage gns3 dan mengunakan konfigurasi yang berbeda beda di setiap nodenya, detail konfigurasi dapat di lihat pada tampilan berikut :
 
