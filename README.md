@@ -97,11 +97,14 @@ Loid meminta agar www.strix.operation.wise.yyy.com hanya bisa diakses dengan por
 
 pada eden buat config baru dengan ```nano /etc/apache2/sites-available/strix.operation.wise.b07.com.conf ```
 ![Logo Nomer 14.1](/image/nomer14.1.png)
+
 kemudian aktifkat dengan ```a2ensite strix.operation.wise.b07.com```
 kemudian edit juga pada ```/etc/apache2/ports.conf ``` seperti berikut
 ![Logo Nomer 14.2](/image/14.2.png)
+
 dan jangan lupa untuk copy resourcenya ``` cp -r /Resourcegan/strix.operation.wise/. /var/www/strix.operation.wise.b07.com/ ```
-Kemudian tes dengan ``` lynx strix.operation.wise.b07.com:15000``` atau 15500 
+Kemudian tes dengan ``` lynx strix.operation.wise.b07.com:15000``` atau 15500
+
 ![Logo Nomer 14.3](/image/14.3.png)
 
 ## Nomer 15 ##
