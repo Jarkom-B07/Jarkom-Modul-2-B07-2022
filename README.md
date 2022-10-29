@@ -267,3 +267,19 @@ Maka hasilnya
 
 ## Nomer 17 ##
 Karena website www.eden.wise.yyy.com semakin banyak pengunjung dan banyak modifikasi sehingga banyak gambar-gambar yang random, maka Loid ingin mengubah request gambar yang memiliki substring “eden” akan diarahkan menuju eden.png. Bantulah Agent Twilight dan Organisasi WISE menjaga perdamaian!
+
+**Jawab :**
+
+pada eden nano /var/www/eden.wise.b07.com/.htaccess dan tambahkan
+```
+RewriteEngine On
+RewriteBase /
+RewriteCond %{REQUEST_URI} !/public/images/eden.png
+RewriteRule /.* http://eden.wise.b07.com/public/images/eden.png [L]
+```
+lalu ganti config pada /etc/apache2/sites-available/eden.wise.b07.com.conf dengan menambah AllowOverride All
+lalu jangan lupa a2enmod rewrite dan juga jangan lupa restart apache
+![Logo Nomer 17.1](/image/17.1.png)
+lalu cek dengan ```lynx www.eden.wise.b07.com/asedenash``` maka hasilnya
+![Logo Nomer 17.2](/image/17.2.png)
+
